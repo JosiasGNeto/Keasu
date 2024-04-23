@@ -17,21 +17,25 @@ public class Game extends Canvas implements Runnable{
 	
 	//---------------------------------------------------- Window Size Settings -/
 	
-	private final int width = 160;
-	private final int height = 120;
+	private final int viewWidth = 160;
+	private final int viewHeight = 120;
 	private final int scale = 4;
 	
 	//---------------------------------------------------- Rendering Settings -/
 	
 	private BufferedImage image;
+	private Spritesheet sheet; 
+	private BufferedImage player;
 	
 	//---------------------------------------------------- Game Constructor -/
 	
 	public Game() {
 		
-		setPreferredSize(new Dimension(width * scale, height * scale));
+		sheet = new Spritesheet("/player_basic_spritesheet.png");
+		player = sheet.getSprite(0, 0, 16, 16);
+		setPreferredSize(new Dimension(viewWidth * scale, viewHeight * scale));
 		startFrame();
-		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		image = new BufferedImage(viewWidth, viewHeight, BufferedImage.TYPE_INT_RGB);
 	}
 	
 	//---------------------------------------------------- Frame Render Function -/
@@ -59,7 +63,12 @@ public class Game extends Canvas implements Runnable{
 	//---------------------------------------------------- Game Stop -/
 	
 	public synchronized void stop() {
-		
+		isRunning = false;
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String args[]) {
@@ -83,10 +92,18 @@ public class Game extends Canvas implements Runnable{
 		}
 		
 		Graphics g = image.getGraphics();
-		g.setColor(new Color(255,255,0));
-		g.fillRect(0, 0, width, height);
+		g.setColor(new Color(0, 0, 0));
+		g.fillRect(0, 0, viewWidth, viewHeight);
+		
+	//---------------------------- Player Rendering -/
+		
+		g.drawImage(player, 20, 20, null);
+		
+	//-----------------------------------------------/
+		
+		g.dispose();
 		g = bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, width * scale, height * scale, null);
+		g.drawImage(image, 0, 0, viewWidth * scale, viewHeight * scale, null);
 		bs.show();
 	}
 	
@@ -119,6 +136,9 @@ public class Game extends Canvas implements Runnable{
 				timer += 1000;
 			}
 		}
+		
+		stop();
+		
 	}
 	
 }
