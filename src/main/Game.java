@@ -4,7 +4,6 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
@@ -12,6 +11,7 @@ import javax.swing.JFrame;
 
 public class Game extends Canvas implements Runnable{
 
+	private static final long serialVersionUID = 1L;
 	public static JFrame frame;
 	private Thread thread;
 	private boolean isRunning = true;
@@ -25,26 +25,11 @@ public class Game extends Canvas implements Runnable{
 	//---------------------------------------------------- Rendering Settings -/
 	
 	private BufferedImage image;
-	private Spritesheet sheet; 
-	private BufferedImage[] player;
-	private int frames = 0; 
-	private int maxFrames = 5;
-	private int curAnimation = 1, maxAnimation = 7;
 	
 	//---------------------------------------------------- Game Constructor -/
 	
 	public Game() {
 		
-		sheet = new Spritesheet("/player_basic_spritesheet.png");
-		player = new BufferedImage[8];
-		player[0] = sheet.getSprite(0, 128, 16, 16);
-		player[1] = sheet.getSprite(16, 128, 16, 16);
-		player[2] = sheet.getSprite(32, 128, 16, 16);
-		player[3] = sheet.getSprite(48, 128, 16, 16);
-		player[4] = sheet.getSprite(64, 128, 16, 16);
-		player[5] = sheet.getSprite(80, 128, 16, 16);
-		player[6] = sheet.getSprite(96, 128, 16, 16);
-		player[7] = sheet.getSprite(112, 128, 16, 16);
 		setPreferredSize(new Dimension(viewWidth * scale, viewHeight * scale));
 		startFrame();
 		image = new BufferedImage(viewWidth, viewHeight, BufferedImage.TYPE_INT_RGB);
@@ -90,15 +75,6 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void tick() {
-		frames++;
-		
-		if(frames > maxFrames) {
-			frames = 0;
-			curAnimation++;
-			if(curAnimation > maxAnimation) {
-				curAnimation = 0;
-			}
-		}
 			 
 	}
 	
@@ -117,8 +93,7 @@ public class Game extends Canvas implements Runnable{
 		g.fillRect(0, 0, viewWidth, viewHeight);
 		
 	//---------------------------- Player Rendering -/
-		Graphics2D g2 = (Graphics2D) g;  
-		g2.drawImage(player[curAnimation], 20, 20, null);
+		//Graphics2D g2 = (Graphics2D) g;
 		
 	//-----------------------------------------------/
 		
