@@ -4,6 +4,8 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ import entities.Entity;
 import entities.Player;
 import graphics.Spritesheet;
 
-public class Game extends Canvas implements Runnable{
+public class Game extends Canvas implements Runnable, KeyListener{
 
 	private static final long serialVersionUID = 1L;
 	public static JFrame frame;
@@ -35,10 +37,13 @@ public class Game extends Canvas implements Runnable{
 	public List<Entity> entities;
 	public Spritesheet spritesheet; 
 	
+	private Player player;
+	
 	//---------------------------------------------------- Game Constructor -/
 	
 	public Game() {
 		
+		addKeyListener(this);
 		setPreferredSize(new Dimension(viewWidth * scale, viewHeight * scale));
 		startFrame();
 		
@@ -47,7 +52,8 @@ public class Game extends Canvas implements Runnable{
 		image = new BufferedImage(viewWidth, viewHeight, BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
 		spritesheet = new Spritesheet("/player_basic_spritesheet.png");
-		entities.add(new Player(0, 0, 16, 16, spritesheet.getSprite(0, 0, 16, 16)));
+		player = new Player(0, 0, 16, 16, spritesheet.getSprite(0, 0, 16, 16));
+		entities.add(player);
 		//-----------------------------------------------/
 	}
 	
@@ -158,6 +164,49 @@ public class Game extends Canvas implements Runnable{
 		}
 		
 		stop();
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+		if(e.getKeyCode() == KeyEvent.VK_W) {
+			player.moveUp = true;
+			
+		} else if(e.getKeyCode() == KeyEvent.VK_S) {
+			player.moveDown = true;
+			
+		} else if(e.getKeyCode() == KeyEvent.VK_A) {
+			player.moveLeft = true;
+			
+		} else if(e.getKeyCode() == KeyEvent.VK_D) {
+			player.moveRight = true;
+			
+		} 
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+		if(e.getKeyCode() == KeyEvent.VK_W) {
+			player.moveUp = false;
+			
+		} else if(e.getKeyCode() == KeyEvent.VK_S) {
+			player.moveDown = false;
+			
+		} else if(e.getKeyCode() == KeyEvent.VK_A) {
+			player.moveLeft = false;
+			
+		} else if(e.getKeyCode() == KeyEvent.VK_D) {
+			player.moveRight = false;
+			
+		} 
 		
 	}
 	
