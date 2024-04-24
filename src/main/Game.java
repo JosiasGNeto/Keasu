@@ -35,7 +35,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	private BufferedImage image;
 	
 	public List<Entity> entities;
-	public Spritesheet spritesheet; 
+	public static Spritesheet spritesheet; 
 	
 	private Player player;
 	
@@ -101,6 +101,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			Entity e = entities.get(i);
 			e.tick();
 		}
+		
 	}
 	
 	//---------------------------------------------------- Game Rendering -/
@@ -166,6 +167,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		stop();
 		
 	}
+	
+	//---------------------------------------------------- Keyboard Inputs -/
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -175,17 +178,39 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
-		if(e.getKeyCode() == KeyEvent.VK_W) {
+		int code = e.getKeyCode();
+		
+		if(code == KeyEvent.VK_W) {
 			player.moveUp = true;
 			
-		} else if(e.getKeyCode() == KeyEvent.VK_S) {
+			player.lookingUp = false;
+			player.lookingDown = false;
+			player.lookingLeft = false;
+			player.lookingRight = false;
+			
+		} else if(code == KeyEvent.VK_S) {
 			player.moveDown = true;
 			
-		} else if(e.getKeyCode() == KeyEvent.VK_A) {
+			player.lookingUp = false;
+			player.lookingDown = false;
+			player.lookingLeft = false;
+			player.lookingRight = false;
+			
+		} else if(code == KeyEvent.VK_A) {
 			player.moveLeft = true;
 			
-		} else if(e.getKeyCode() == KeyEvent.VK_D) {
+			player.lookingUp = false;
+			player.lookingDown = false;
+			player.lookingLeft = false;
+			player.lookingRight = false;
+			
+		} else if(code == KeyEvent.VK_D) {
 			player.moveRight = true;
+			
+			player.lookingUp = false;
+			player.lookingDown = false;
+			player.lookingLeft = false;
+			player.lookingRight = false;
 			
 		} 
 		
@@ -194,17 +219,39 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		
-		if(e.getKeyCode() == KeyEvent.VK_W) {
+		int code = e.getKeyCode();
+		
+		if(code == KeyEvent.VK_W) {
 			player.moveUp = false;
 			
-		} else if(e.getKeyCode() == KeyEvent.VK_S) {
+			player.lookingUp = true;
+			player.lookingDown = false;
+			player.lookingLeft = false;
+			player.lookingRight = false;
+			
+		} else if(code == KeyEvent.VK_S) {
 			player.moveDown = false;
 			
-		} else if(e.getKeyCode() == KeyEvent.VK_A) {
+			player.lookingUp = false;
+			player.lookingDown = true;
+			player.lookingLeft = false;
+			player.lookingRight = false;
+			
+		} else if(code == KeyEvent.VK_A) {
 			player.moveLeft = false;
 			
-		} else if(e.getKeyCode() == KeyEvent.VK_D) {
+			player.lookingUp = false;
+			player.lookingDown = false;
+			player.lookingLeft = true;
+			player.lookingRight = false;
+			
+		} else if(code == KeyEvent.VK_D) {
 			player.moveRight = false;
+			
+			player.lookingUp = false;
+			player.lookingDown = false;
+			player.lookingLeft = false;
+			player.lookingRight = true;
 			
 		} 
 		
