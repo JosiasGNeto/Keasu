@@ -80,21 +80,25 @@ public class Player extends Entity{
 		
 		//------ General Player Movement Actions
 		
-		playerIsMoving = false;
-		
-		if(moveRight) {
-			playerIsMoving = true;
-			x += speed;
-		} else if(moveLeft) {
-			playerIsMoving = true;
-			x -= speed;
-		} else if(moveUp) {
-			playerIsMoving = true;
-			y -= speed;
-		} else if(moveDown) {
-			playerIsMoving = true;
-			y += speed;
-		}	
+	    playerIsMoving = moveRight || moveLeft || moveUp || moveDown;
+
+	    if (moveRight) {
+	        lookingRight = true;
+	        lookingLeft = lookingUp = lookingDown = false;
+	        x += speed;
+	    } else if (moveLeft) {
+	        lookingLeft = true;
+	        lookingRight = lookingUp = lookingDown = false;
+	        x -= speed;
+	    } else if (moveUp) {
+	        lookingUp = true;
+	        lookingRight = lookingLeft = lookingDown = false;
+	        y -= speed;
+	    } else if (moveDown) {
+	        lookingDown = true;
+	        lookingRight = lookingLeft = lookingUp = false;
+	        y += speed;
+	    }	
 		
 		//------ Moving Frames
 		
@@ -139,13 +143,13 @@ public class Player extends Entity{
 		
 		//------ Render Idle Animation -/
 		
-		if(lookingRight) {
+		if(lookingRight && !playerIsMoving) {
 			g.drawImage(rightPlayerIdle[idleIndex], this.getX(), this.getY(), null);
-		} else if(lookingLeft) {
+		} else if(lookingLeft && !playerIsMoving) {
 			g.drawImage(leftPlayerIdle[idleIndex], this.getX(), this.getY(), null);
-		} else if(lookingUp) {
+		} else if(lookingUp && !playerIsMoving) {
 			g.drawImage(upPlayerIdle[idleIndex], this.getX(), this.getY(), null);
-		} else if(lookingDown) {
+		} else if(lookingDown && !playerIsMoving) {
 			g.drawImage(downPlayerIdle[idleIndex], this.getX(), this.getY(), null);
 		}
 		

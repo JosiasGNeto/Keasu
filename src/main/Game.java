@@ -52,7 +52,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		image = new BufferedImage(viewWidth, viewHeight, BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
 		spritesheet = new Spritesheet("/player_basic_spritesheet.png");
-		player = new Player(0, 0, 16, 16, spritesheet.getSprite(0, 0, 16, 16));
+		player = new Player((viewWidth / 2), (viewHeight / 2), 16, 16, spritesheet.getSprite(0, 0, 16, 16));
 		entities.add(player);
 		//-----------------------------------------------/
 	}
@@ -183,35 +183,15 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		if(code == KeyEvent.VK_W) {
 			player.moveUp = true;
 			
-			player.lookingUp = false;
-			player.lookingDown = false;
-			player.lookingLeft = false;
-			player.lookingRight = false;
-			
 		} else if(code == KeyEvent.VK_S) {
 			player.moveDown = true;
-			
-			player.lookingUp = false;
-			player.lookingDown = false;
-			player.lookingLeft = false;
-			player.lookingRight = false;
 			
 		} else if(code == KeyEvent.VK_A) {
 			player.moveLeft = true;
 			
-			player.lookingUp = false;
-			player.lookingDown = false;
-			player.lookingLeft = false;
-			player.lookingRight = false;
-			
 		} else if(code == KeyEvent.VK_D) {
 			player.moveRight = true;
-			
-			player.lookingUp = false;
-			player.lookingDown = false;
-			player.lookingLeft = false;
-			player.lookingRight = false;
-			
+						
 		} 
 		
 	}
@@ -224,35 +204,15 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		if(code == KeyEvent.VK_W) {
 			player.moveUp = false;
 			
-			player.lookingUp = true;
-			player.lookingDown = false;
-			player.lookingLeft = false;
-			player.lookingRight = false;
-			
 		} else if(code == KeyEvent.VK_S) {
 			player.moveDown = false;
-			
-			player.lookingUp = false;
-			player.lookingDown = true;
-			player.lookingLeft = false;
-			player.lookingRight = false;
-			
+						
 		} else if(code == KeyEvent.VK_A) {
 			player.moveLeft = false;
 			
-			player.lookingUp = false;
-			player.lookingDown = false;
-			player.lookingLeft = true;
-			player.lookingRight = false;
-			
 		} else if(code == KeyEvent.VK_D) {
 			player.moveRight = false;
-			
-			player.lookingUp = false;
-			player.lookingDown = false;
-			player.lookingLeft = false;
-			player.lookingRight = true;
-			
+				
 		} 
 		
 	}
