@@ -1,5 +1,6 @@
 package world;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -14,16 +15,39 @@ public class World {
 			int[] pixels = new int[map.getWidth() * map.getHeight()];
 			map.getRGB(0, 0, map.getWidth(), map.getHeight(), pixels, 0, map.getWidth());
 			
-			//------------------------------------------------- Map Editor -/
-			for(int i = 0; i < pixels.length; i++) {
-				if(pixels[i] == 0xFFFFFFFF) {
-					
-				}
-			}
+			//---------------------------------------- World Editor ----------------------------------------/
 			
+			for(int xx = 0; xx < map.getWidth(); xx++) {
+					
+					for(int yy = 0; yy < map.getHeight(); yy++) {
+						
+						int currentPixel = xx + (yy * map.getWidth());
+						
+						//--------------------------------- Floor ---------------------------------//
+						if(pixels[currentPixel] == 0xFF000000) {
+							
+						} 
+						//-------------------------------------------------------------------------//
+						
+						//---------------------------------- Wall ---------------------------------//
+						else if (pixels [currentPixel] == 0xFFFFFFFF) {
+							
+						}
+						//-------------------------------------------------------------------------//
+						
+					}
+				
+				}
+			
+			//--------------------------------------------------------------------------------------------/
+		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void render(Graphics g) {
+		
 	}
 	
 }
