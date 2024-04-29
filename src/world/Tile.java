@@ -9,7 +9,8 @@ public class Tile {
 	
 	//---------------------------------- Loading Tiles ----------------------------------//
 	
-	public static BufferedImage tile_floor = Game.tilesheet.getTile(17, 17, 16, 16);
+	public static BufferedImage tile_floor = Game.tilesheet.getTile(160, 64, 16, 16);
+	public static BufferedImage tile_wall = Game.tilesheet.getTile(17, 17, 16, 16);
 	
 	//-----------------------------------------------------------------------------------//
 	

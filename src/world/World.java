@@ -6,7 +6,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+//-------------------------------- Importing Tiles -/
 import graphics.tiles.FloorTile;
+import graphics.tiles.WallTile;
+
+//--------------------------------------------------/
 
 public class World {
 	
@@ -43,6 +47,8 @@ public class World {
 						
 						//---------------------------------- Wall ---------------------------------//
 						else if (pixels [currentPixel] == 0xFF000000) {
+							
+							tiles[xx + (yy * width)] = new WallTile(xx * 16, yy * 16, Tile.tile_wall);
 							
 						}
 						//-------------------------------------------------------------------------//
