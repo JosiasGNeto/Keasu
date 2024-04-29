@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import main.Game;
 import world.Camera;
+import world.World;
 
 public class Player extends Entity{
 	
@@ -127,11 +128,11 @@ public class Player extends Entity{
 			}
 		}
 		
-		Camera.x = this.getX() - (Game.viewWidth / 2);
-		Camera.y = this.getY() - (Game.viewHeight / 2);
+		Camera.x = Camera.clamp(this.getX() - (Game.viewWidth / 2),0 , World.width * 16 - Game.viewWidth);
+		Camera.y = Camera.clamp(this.getY() - (Game.viewHeight / 2), 0, World.height * 16 - Game.viewHeight);
 		
 	}
-	
+
 	public void render(Graphics g) {
 		
 		//------ Render Moving Animation -/

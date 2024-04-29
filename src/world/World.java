@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 //-------------------------------- Importing Tiles -/
 import graphics.tiles.FloorTile;
 import graphics.tiles.WallTile;
+import main.Game;
 
 //--------------------------------------------------/
 
@@ -66,9 +67,18 @@ public class World {
 	
 	public void render(Graphics g) {
 		
-		for (int xx = 0; xx < width; xx++) {
+		int xStart = Camera.x >> 4;
+		int yStart = Camera.y >> 4;
+		
+		int xFinal = xStart + (Game.viewWidth >> 4) + 2;
+		int yFinal = yStart + (Game.viewHeight >> 4) + 2;
+		
+		for (int xx = xStart; xx <= xFinal; xx++) {
 			
-			for (int yy = 0; yy < height; yy++) {
+			for (int yy = yStart; yy <= yFinal; yy++) {
+				
+				if (xx < 0 || yy < 0 || xx >= width || yy >= height)
+					continue;
 				
 				Tile tile = tiles[xx + (yy * width)];
 				tile.render(g);
