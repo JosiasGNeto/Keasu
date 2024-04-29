@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import main.Game;
+import world.Camera;
 
 public class Player extends Entity{
 	
@@ -125,32 +126,39 @@ public class Player extends Entity{
 				}
 			}
 		}
+		
+		Camera.x = this.getX() - (Game.viewWidth / 2);
+		Camera.y = this.getY() - (Game.viewHeight / 2);
+		
 	}
 	
 	public void render(Graphics g) {
 		
 		//------ Render Moving Animation -/
 		
+		int cameraX = this.getX() - Camera.x - (Game.scale * 2);
+		int cameraY = this.getY() - Camera.y - (Game.scale * 2);
+		
 		if(moveRight) {
-			g.drawImage(rightPlayerMove[index], this.getX(), this.getY(), null);
+			g.drawImage(rightPlayerMove[index], cameraX, cameraY, null);
 		} else if(moveLeft) {
-			g.drawImage(leftPlayerMove[index], this.getX(), this.getY(), null);
+			g.drawImage(leftPlayerMove[index], cameraX, cameraY, null);
 		} else if(moveUp) {
-			g.drawImage(upPlayerMove[index], this.getX(), this.getY(), null);
+			g.drawImage(upPlayerMove[index], cameraX, cameraY, null);
 		} else if(moveDown) {
-			g.drawImage(downPlayerMove[index], this.getX(), this.getY(), null);
+			g.drawImage(downPlayerMove[index], cameraX, cameraY, null);
 		}
 		
 		//------ Render Idle Animation -/
 		
 		if(lookingRight && !playerIsMoving) {
-			g.drawImage(rightPlayerIdle[idleIndex], this.getX(), this.getY(), null);
+			g.drawImage(rightPlayerIdle[idleIndex], cameraX, cameraY, null);
 		} else if(lookingLeft && !playerIsMoving) {
-			g.drawImage(leftPlayerIdle[idleIndex], this.getX(), this.getY(), null);
+			g.drawImage(leftPlayerIdle[idleIndex], cameraX, cameraY, null);
 		} else if(lookingUp && !playerIsMoving) {
-			g.drawImage(upPlayerIdle[idleIndex], this.getX(), this.getY(), null);
+			g.drawImage(upPlayerIdle[idleIndex], cameraX, cameraY, null);
 		} else if(lookingDown && !playerIsMoving) {
-			g.drawImage(downPlayerIdle[idleIndex], this.getX(), this.getY(), null);
+			g.drawImage(downPlayerIdle[idleIndex], cameraX, cameraY, null);
 		}
 		
 	}

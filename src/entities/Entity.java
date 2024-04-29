@@ -3,6 +3,8 @@ package entities;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import world.Camera;
+
 public class Entity {
 
 	protected double x;
@@ -53,6 +55,6 @@ public class Entity {
 	//---------------------------------------------------- Entity Rendering -/
 	
 	public void render(Graphics g) {
-		g.drawImage(sprite, this.getX(), this.getY(), null);
+		g.drawImage(sprite, this.getX() - Camera.x, this.getY() - Camera.y, null);
 	}
 }

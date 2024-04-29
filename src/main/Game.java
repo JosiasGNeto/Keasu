@@ -28,9 +28,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	
 	//---------------------------------------------------- Window Size Settings -/
 	
-	private final int viewWidth = 160;
-	private final int viewHeight = 120;
-	private final int scale = 4;
+	public static final int viewWidth = 160;
+	public static final int viewHeight = 120;
+	public static final int scale = 4;
 	
 	//---------------------------------------------------- Rendering Settings -/
 	
