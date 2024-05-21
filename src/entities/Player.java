@@ -84,19 +84,19 @@ public class Player extends Entity{
 		
 	    playerIsMoving = moveRight || moveLeft || moveUp || moveDown;
 
-	    if (moveRight) {
+	    if (moveRight && World.isFree((int)(x + speed), this.getY())) {
 	        lookingRight = true;
 	        lookingLeft = lookingUp = lookingDown = false;
 	        x += speed;
-	    } else if (moveLeft) {
+	    } else if (moveLeft && World.isFree((int)(x - speed), this.getY())) {
 	        lookingLeft = true;
 	        lookingRight = lookingUp = lookingDown = false;
 	        x -= speed;
-	    } else if (moveUp) {
+	    } else if (moveUp && World.isFree(this.getX(), (int)(y - speed))) {
 	        lookingUp = true;
 	        lookingRight = lookingLeft = lookingDown = false;
 	        y -= speed;
-	    } else if (moveDown) {
+	    } else if (moveDown && World.isFree(this.getX(), (int)(y + speed))) {
 	        lookingDown = true;
 	        lookingRight = lookingLeft = lookingUp = false;
 	        y += speed;
@@ -135,11 +135,15 @@ public class Player extends Entity{
 
 	public void render(Graphics g) {
 		
-		//------ Render Moving Animation -/
+		//------ fixing the player's position in the center of the screen ------//
 		
 		int cameraX = this.getX() - Camera.x - (Game.scale * 2);
 		int cameraY = this.getY() - Camera.y - (Game.scale * 2);
 		
+		//----------------------------------------------------------------------//
+		
+		
+		//------ Render Moving Animation -/
 		if(moveRight) {
 			g.drawImage(rightPlayerMove[index], cameraX, cameraY, null);
 		} else if(moveLeft) {

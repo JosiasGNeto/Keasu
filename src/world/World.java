@@ -15,10 +15,11 @@ import main.Game;
 
 public class World {
 	
-	private Tile[] tiles;
+	public static Tile[] tiles;
 	
 	public static int width;
 	public static int height;
+	public static final int tile_size = 16;
 	
 	public World(String path) {
 		
@@ -41,15 +42,15 @@ public class World {
 						//--------------------------------- Floor ---------------------------------//
 						if(pixels[currentPixel] == 0xFFFFFFFF) {
 							
-							tiles[xx + (yy * width)] = new FloorTile(xx * 16, yy * 16, Tile.tile_floor);
+							tiles[xx + (yy * width)] = new FloorTile(xx * tile_size, yy * tile_size, Tile.tile_floor);
 							
 						} 
 						//-------------------------------------------------------------------------//
 						
-						//---------------------------------- Wall ---------------------------------//
+						//---------------------------------- Wall ---------------------------------//x
 						else if (pixels [currentPixel] == 0xFF000000) {
 							
-							tiles[xx + (yy * width)] = new WallTile(xx * 16, yy * 16, Tile.tile_wall);
+							tiles[xx + (yy * width)] = new WallTile(xx * tile_size, yy * tile_size, Tile.tile_wall);
 							
 						}
 						//-------------------------------------------------------------------------//
@@ -64,6 +65,35 @@ public class World {
 			e.printStackTrace();
 		}
 	}
+	
+	//--------------------------------- Player Tile Collision -------------------------------//
+	
+	public static boolean isFree(int xNext, int yNext) {
+		
+		//--- checking the player's collision with the sides of the rectangle ---//
+		
+		int cameraFix = (Game.scale * 2);
+		
+		int x1 = (xNext - cameraFix) / tile_size;
+		int y1 = (yNext - cameraFix) / tile_size;
+		
+		int x2 = (xNext + tile_size - 1 - cameraFix) / tile_size;
+		int y2 = (yNext - cameraFix) / tile_size;
+		
+		int x3 = (xNext - cameraFix) / tile_size;
+		int y3 = (yNext + tile_size - 1 - cameraFix) / tile_size;
+		
+		int x4 = (xNext + tile_size - 1 - cameraFix) / tile_size;
+		int y4 = (yNext + tile_size - 1 - cameraFix) / tile_size;
+		
+		return !((tiles[x1 + (y1 * World.width)] instanceof WallTile) || 
+				 (tiles[x2 + (y2 * World.width)] instanceof WallTile) ||
+				 (tiles[x3 + (y3 * World.width)] instanceof WallTile) ||
+				 (tiles[x4 + (y4 * World.width)] instanceof WallTile));
+		
+	}
+	
+	//---------------------------------------------------------------------------------------//
 	
 	public void render(Graphics g) {
 		
