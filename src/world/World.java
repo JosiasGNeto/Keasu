@@ -39,21 +39,53 @@ public class World {
 						
 						int currentPixel = xx + (yy * map.getWidth());
 						
-						//--------------------------------- Floor ---------------------------------//
+						//------------------------------------ Floor ------------------------------------//
 						if(pixels[currentPixel] == 0xFFFFFFFF) {
 							
 							tiles[xx + (yy * width)] = new FloorTile(xx * tile_size, yy * tile_size, Tile.tile_floor);
 							
 						} 
-						//-------------------------------------------------------------------------//
+						//-------------------------------------------------------------------------------//
 						
-						//---------------------------------- Wall ---------------------------------//x
+						//------------------------------------- Wall ------------------------------------//
 						else if (pixels [currentPixel] == 0xFF000000) {
 							
 							tiles[xx + (yy * width)] = new WallTile(xx * tile_size, yy * tile_size, Tile.tile_wall);
 							
 						}
-						//-------------------------------------------------------------------------//
+						//-------------------------------------------------------------------------------//
+						
+						//----------------------------------- Top Wall ----------------------------------//
+						else if (pixels [currentPixel] == 0xFF000001) {
+							
+							tiles[xx + (yy * width)] = new WallTile(xx * tile_size, yy * tile_size, Tile.top_tile_wall);
+							
+						}
+						//-------------------------------------------------------------------------------//
+						
+						//---------------------------------- Bottom Wall --------------------------------//
+						else if (pixels [currentPixel] == 0xFF000002) {
+							
+							tiles[xx + (yy * width)] = new WallTile(xx * tile_size, yy * tile_size, Tile.bottom_tile_wall);
+							
+						}
+						//-------------------------------------------------------------------------------//
+						
+						//---------------------------------- Right Wall ---------------------------------//
+						else if (pixels [currentPixel] == 0xFF000003) {
+							
+							tiles[xx + (yy * width)] = new WallTile(xx * tile_size, yy * tile_size, Tile.right_tile_wall);
+							
+						}
+						//-------------------------------------------------------------------------------//
+						
+						//----------------------------------- Left Wall ---------------------------------//
+						else if (pixels [currentPixel] == 0xFF000004) {
+							
+							tiles[xx + (yy * width)] = new WallTile(xx * tile_size, yy * tile_size, Tile.left_tile_wall);
+							
+						}
+						//-------------------------------------------------------------------------------//
 						
 					}
 				
@@ -70,7 +102,7 @@ public class World {
 	
 	public static boolean isFree(int xNext, int yNext) {
 		
-		//--- checking the player's collision with the sides of the rectangle ---//
+		//--- checking the entities collision with the sides of the rectangle ---//
 		
 		int cameraFix = (Game.scale * 2);
 		
