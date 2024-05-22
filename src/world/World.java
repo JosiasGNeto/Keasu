@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 //-------------------------------- Importing Tiles -/
 import graphics.tiles.FloorTile;
 import graphics.tiles.WallTile;
+import graphics.tiles.WaterTile;
 import main.Game;
 
 //--------------------------------------------------/
@@ -87,6 +88,22 @@ public class World {
 						}
 						//-------------------------------------------------------------------------------//
 						
+						//----------------------------------- Water ---------------------------------//
+						else if (pixels [currentPixel] == 0xFF82b3d8) {
+							
+							tiles[xx + (yy * width)] = new WaterTile(xx * tile_size, yy * tile_size, Tile.tile_water);
+							
+						}
+						//-------------------------------------------------------------------------------//
+						
+						//----------------------------------- Sign ---------------------------------//
+						else if (pixels [currentPixel] == 0xFFcca47e) {
+							
+							tiles[xx + (yy * width)] = new WallTile(xx * tile_size, yy * tile_size, Tile.prop_signal);
+							
+						}
+						//-------------------------------------------------------------------------------//
+						
 					}
 				
 				}
@@ -107,10 +124,10 @@ public class World {
 		int cameraFix = (Game.scale * 2);
 		
 		int x1 = (xNext - cameraFix) / tile_size;
-		int y1 = (yNext - cameraFix) / tile_size;
+		int y1 = (yNext - cameraFix + 8) / tile_size;             //--> +8 (The player's body overlaps the block)
 		
 		int x2 = (xNext + tile_size - 1 - cameraFix) / tile_size;
-		int y2 = (yNext - cameraFix) / tile_size;
+		int y2 = (yNext - cameraFix + 8) / tile_size;
 		
 		int x3 = (xNext - cameraFix) / tile_size;
 		int y3 = (yNext + tile_size - 1 - cameraFix) / tile_size;
@@ -121,7 +138,11 @@ public class World {
 		return !((tiles[x1 + (y1 * World.width)] instanceof WallTile) || 
 				 (tiles[x2 + (y2 * World.width)] instanceof WallTile) ||
 				 (tiles[x3 + (y3 * World.width)] instanceof WallTile) ||
-				 (tiles[x4 + (y4 * World.width)] instanceof WallTile));
+				 (tiles[x4 + (y4 * World.width)] instanceof WallTile) ||
+				 (tiles[x1 + (y1 * World.width)] instanceof WaterTile) || 
+				 (tiles[x2 + (y2 * World.width)] instanceof WaterTile) ||
+				 (tiles[x3 + (y3 * World.width)] instanceof WaterTile) ||
+				 (tiles[x4 + (y4 * World.width)] instanceof WaterTile));
 		
 	}
 	

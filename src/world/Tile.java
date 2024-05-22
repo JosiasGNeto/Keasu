@@ -24,6 +24,12 @@ public class Tile {
 	//------------ Corners -----//
 	public static BufferedImage left_corner_tile_wall = Game.tilesheet.getTile(48, 85, 16, 16);
 	public static BufferedImage right_corner_tile_wall = Game.tilesheet.getTile(32, 94, 16, 16);
+	//------------ Water -------//
+	public static BufferedImage tile_water = Game.tilesheet.getTile(80, 80, 16, 16);
+	
+	//----------------------------------- Props Tiles -----------------------------------//
+	
+	public static BufferedImage prop_signal = Game.props.getTile(64, 48, 16, 16);
 	
 	//-----------------------------------------------------------------------------------//
 	

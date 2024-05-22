@@ -38,7 +38,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	
 	public List<Entity> entities;
 	public static Spritesheet spritesheet;
-	public static Tilesheet tilesheet;
+	public static Tilesheet tilesheet, props;
 	public static World world;
 	
 	private Player player;
@@ -57,6 +57,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		entities = new ArrayList<Entity>();
 		spritesheet = new Spritesheet("/player/player_basic_spritesheet.png");
 		tilesheet = new Tilesheet("/tiles/tileset_simplified.png");
+		props = new Tilesheet("/tiles/props.png");
 		world = new World("/maps/map.png");
 		player = new Player((viewWidth / 2), (viewHeight / 2), 16, 16, spritesheet.getSprite(0, 0, 16, 16));
 		entities.add(player);
@@ -122,7 +123,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		}
 		
 		Graphics g = image.getGraphics();
-		g.setColor(new Color(100, 230, 0));
+		g.setColor(new Color(0xFF85be8c));
 		g.fillRect(0, 0, viewWidth, viewHeight);
 		
 	//---------------------------- Player Rendering -/
@@ -144,6 +145,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	//---------------------------------------------------- Game Loop -/
 	
 	public void run() {
+		
+		requestFocus();
 		
 		long lastTime = System.nanoTime();
 		double FPS = 60;
